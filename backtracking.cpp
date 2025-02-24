@@ -1,10 +1,14 @@
 #include "grafo.h"
 #include <fstream>
+#include <chrono>
 
 using namespace std;
 
 
 pair<int, int> Grafo::backtracking(string arq) {
+    // Marca o início do tempo
+    auto start = chrono::high_resolution_clock::now();
+
     vector<int> rota(num_vertices, -1);
     vector<int> rotaAchada(num_vertices);
     rota[0] = 0;
@@ -21,6 +25,11 @@ pair<int, int> Grafo::backtracking(string arq) {
         fout << rotaAchada[i] + 1 << " " << rotaAchada[i + 1] + 1 << " " << dist[rotaAchada[i]][rotaAchada[i + 1]] << "\n";
     fout << rotaAchada.back() + 1 << " " << rotaAchada[0] + 1 << " " << dist[rotaAchada.back()][rotaAchada[0]] << "\n";
 
+    // Marca o fim do tempo e calcula o tempo de execucao
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double, milli> duration = end - start;
+    cout << "Tempo de execucao: " << duration.count() << " ms" << endl;
+
     return {solAchada, nosVisitados};
 }
 
@@ -33,7 +42,7 @@ void Grafo::backtracking(vector<int>& rota, int pos, int valor, int& solAchada, 
     for(int i = 0; i < pos; i++) {
         if(visitada[rota[i]]) 
             return;  // Se já foi visitado, a busca é interrompida
-        visitada[rota[i]] = true;
+        visitada[rota[i]] = true; 
     }
 
     // Se chegou à solução viável (todos os vértices foram visitados), calcula o valor da solução

@@ -1,10 +1,14 @@
 #include "grafo.h"
 #include <fstream>
+#include <chrono>
 
 using namespace std;
 
 
 pair<int, int> Grafo::profundidade(string arq) {
+    // Marca o início do tempo
+    auto start = chrono::high_resolution_clock::now();
+
     vector<int> rota(num_vertices, -1);  // Rota com os vértices visitados, inicialmente com todos os valores -1 (não visitado)
     vector<int> rotaOtima(num_vertices); 
     
@@ -22,6 +26,11 @@ pair<int, int> Grafo::profundidade(string arq) {
     for(int i = 0; i < num_vertices - 1; i++)
         fout << rotaOtima[i] + 1 << " " << rotaOtima[i + 1] + 1 << " " << dist[rotaOtima[i]][rotaOtima[i + 1]] << "\n";
     fout << rotaOtima.back() + 1 << " " << rotaOtima[0] + 1 << " " << dist[rotaOtima.back()][rotaOtima[0]] << "\n";
+
+    // Marca o fim do tempo e calcula o tempo de execucao
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double, milli> duration = end - start;
+    cout << "Tempo de execucao: " << duration.count() << " ms" << endl;
 
     return {solOtima, nosVisitados};
 }

@@ -24,27 +24,27 @@ int main() {
         g.addAresta(idx1 - 1, idx2 - 1, d);
     }
 
-    // Fechando o arquivo de entrada
+    // Fechando o arquivo 
     arquivo.close();
 
-    cout << "Busca Irrevogavel\n";
+    cout << "BUSCA IRREVOGAVEL\n";
     auto resultado = g.irrevogavel("solucao_irrevogavel.txt");
-    cout << "Solucao irrevogavel: " << resultado.first << "\n";
+    cout << "Custo: " << resultado.first << "\n";
     cout << "Nos visitados: " << resultado.second << "\n\n";
 
-    cout << "Busca Backtracking\n";
+    cout << "BUSCA BACKTRACKING\n";
     resultado = g.backtracking("solucao_backtracking.txt");
-    cout << "Solucao backtracking: " << resultado.first << "\n";
+    cout << "Custo: " << resultado.first << "\n";
     cout << "Nos visitados: " << resultado.second << "\n\n";
 
-    cout << "Busca em Largura\n";
+    cout << "BUSCA EM LARGURA\n";
     resultado = g.bfs("solucao_bfs.txt");
-    cout << "Solucao em  Largura: " << resultado.first << "\n";
+    cout << "Custo: " << resultado.first << "\n";
     cout << "Nos visitados: " << resultado.second << "\n\n";
 
-    cout << "Busca em Profundidade\n";
+    cout << "BUSCA EM PROFUNDIDADE\n";
     resultado = g.profundidade("solucao_profundidade.txt");
-    cout << "Solucao em Profundidade: " << resultado.first << "\n";
+    cout << "Custo: " << resultado.first << "\n";
     cout << "Nos visitados: " << resultado.second << "\n\n";
 
 

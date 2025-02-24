@@ -40,8 +40,16 @@ Esses algoritmos utilizam heurísticas para guiar a busca em direção ao objeti
 Cada algoritmo está implementado em sua respectiva pasta.  
 
 ### 🔹 Requisitos  
-- 
-- 
+- **g++** (versão 10 ou superior)
+- **Arquivos de entrada**: Arquivo de instância do problema em formato `.txt`
 
 ## 🚀 Como Usar  
-Para rodar os algoritmos localmente, siga as instruções abaixo:  
+Para rodar os algoritmos localmente, siga as instruções abaixo:
+
+1. **Compilar o código**:
+   ```bash
+   g++ main.cpp bfs.cpp profundidade.cpp irrevogavel.cpp backtracking.cpp -o metodos-de-busca.exe
+
+2. **Executar o código**:
+   ```bash
+   .\metodos-de-busca.exe instancia.txt
