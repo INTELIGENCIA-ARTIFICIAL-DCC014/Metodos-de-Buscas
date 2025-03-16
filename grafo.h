@@ -95,5 +95,8 @@ class Grafo {
         pair<int, int> profundidade(string arq);
         void profundidade(vector<int>& rota, int pos, int valor, int &solOtima, vector<int>& rotaOtima, int& nosVisitados);
 
+        pair<int, int> ordenada(string arq);
+        void ordenada(vector<int>& rota, int pos, int valor, int &solOtima, vector<int>& rotaOtima, int& nosVisitados);
+
 
 };

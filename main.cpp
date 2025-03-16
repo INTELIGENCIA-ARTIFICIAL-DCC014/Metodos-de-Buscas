@@ -47,6 +47,11 @@ int main() {
     cout << "Custo: " << resultado.first << "\n";
     cout << "Nos visitados: " << resultado.second << "\n\n";
 
+    cout << "BUSCA ORDENADA\n";
+    resultado = g.ordenada("solucao_ordenada.txt");
+    cout << "Custo: " << resultado.first << "\n";
+    cout << "Nos visitados: " << resultado.second << "\n\n";
+
 
     return 0;
 }
