@@ -15,7 +15,7 @@ pair<int, int> Grafo::ida(string arq) {
     int solAchada = -1;
     int nosVisitados = 0;
 
-    ordenada(rota, 1, 0, solAchada, rotaAchada, nosVisitados);
+    ida(rota, 1, 0, solAchada, rotaAchada, nosVisitados);
     
     ofstream fout("source/" + arq);
     fout << num_vertices << "\n";
