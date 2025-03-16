@@ -98,5 +98,6 @@ class Grafo {
         pair<int, int> ordenada(string arq);
         void ordenada(vector<int>& rota, int pos, int valor, int &solOtima, vector<int>& rotaOtima, int& nosVisitados);
 
-
+        pair<int, int> ida(string arq);
+        void ida(vector<int>& rota, int pos, int valor, int &solOtima, vector<int>& rotaOtima, int& nosVisitados);
 };
