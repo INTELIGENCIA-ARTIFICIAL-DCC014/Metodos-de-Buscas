@@ -83,6 +83,19 @@ class Grafo {
             }
         }
 
+        // Método da heurística de vizinho mais próximo (passar o nó atual e vetor de cidades visitadas como parâmetro)
+        int vizinhoMaisProximo(int noAtual, vector<bool>& visitados) {
+            int vizinhoMaisProximo = -1;
+            int menorDistancia = INF;
+            for (int i = 0; i < num_vertices; i++) {
+                if (!visitados[i] && i != noAtual && dist[noAtual][i] < menorDistancia){
+                    menorDistancia = dist[noAtual][i];
+                    vizinhoMaisProximo = i;
+                }
+            }
+            return vizinhoMaisProximo;
+        }
+
         // Métodos de Busca
         pair<int, int> irrevogavel(string arq);
         void irrevogavel(vector<int>& rota, int pos, int valor, int& solAchada, vector<int>& rotaAchada, int& nosVisitados);
