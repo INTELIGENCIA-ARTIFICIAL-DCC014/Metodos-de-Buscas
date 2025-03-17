@@ -52,6 +52,8 @@ int main() {
     cout << "Custo: " << resultado.first << "\n";
     cout << "Nos visitados: " << resultado.second << "\n\n";
 
+    cout << "BUSCA IDA*\n";
+    resultado = g.ida("solucao_ida.txt");
 
     return 0;
 }

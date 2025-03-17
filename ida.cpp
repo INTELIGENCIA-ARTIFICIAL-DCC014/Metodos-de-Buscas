@@ -8,32 +8,29 @@ using namespace std;
 pair<int, int> Grafo::ida(string arq) {
     auto start = chrono::high_resolution_clock::now();
 
-    vector<int> rota(num_vertices, -1);
-    vector<int> rotaAchada(num_vertices);
-    rota[0] = 0;
+    printMatrizDistancias();
 
-    int solAchada = -1;
-    int nosVisitados = 0;
+    // vector<int> rota(num_vertices, -1);
+    // vector<int> rotaAchada(num_vertices);
+    // rota[0] = 0;
 
-    ida(rota, 1, 0, solAchada, rotaAchada, nosVisitados);
+    // int solAchada = -1;
+    // int nosVisitados = 0;
+
+    // ida(rota, 1, 0, solAchada, rotaAchada, nosVisitados);
     
     ofstream fout("source/" + arq);
     fout << num_vertices << "\n";
 
-    for (int i = 0; i < num_vertices - 1; i++)
-        fout << rotaAchada[i] + 1 << " " << rotaAchada[i + 1] + 1 << " " << dist[rotaAchada[i]][rotaAchada[i + 1]] << "\n";
-    fout << rotaAchada.back() + 1 << " " << rotaAchada[0] + 1 << " " << dist[rotaAchada.back()][rotaAchada[0]] << "\n";
-
-    if (solAchada == INF)
-        cout << "Fracasso!\n";
-    else 
-        cout << "Sucesso!\n";
+    // for (int i = 0; i < num_vertices - 1; i++)
+    //     fout << rotaAchada[i] + 1 << " " << rotaAchada[i + 1] + 1 << " " << dist[rotaAchada[i]][rotaAchada[i + 1]] << "\n";
+    // fout << rotaAchada.back() + 1 << " " << rotaAchada[0] + 1 << " " << dist[rotaAchada.back()][rotaAchada[0]] << "\n";
 
     auto end = chrono::high_resolution_clock::now();
     chrono::duration<double, milli> duration = end - start;
     cout << "Tempo de execucao: " << duration.count() << " ms" << endl;
     
-    return {solAchada, nosVisitados};
+    return {1, 0};
 }
 
 void Grafo::ida(vector<int>& rota, int pos, int valor, int& solAchada, vector<int>& rotaAchada, int& nosVisitados) {
@@ -76,7 +73,7 @@ void Grafo::ida(vector<int>& rota, int pos, int valor, int& solAchada, vector<in
         int cidade = par.second;
     
         rota[pos] = cidade;
-        ordenada(rota, pos + 1, valor + custo, solAchada, rotaAchada, nosVisitados);
+        //ordenada(rota, pos + 1, valor + custo, solAchada, rotaAchada, nosVisitados);
         rota[pos] = -1;
     }
 }
