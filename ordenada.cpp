@@ -2,6 +2,7 @@
 #include <fstream>
 #include <chrono>
 #include <algorithm>
+#include <limits>
 
 using namespace std;
 
@@ -9,22 +10,45 @@ pair<int, int> Grafo::ordenada(string arq) {
     auto start = chrono::high_resolution_clock::now();
 
     vector<int> rota(num_vertices, -1);
-    vector<int> rotaAchada(num_vertices);
+    vector<bool> visitada(num_vertices, false);
     rota[0] = 0;
+    visitada[0] = true;
 
-    int solAchada = -1;
-    int nosVisitados = 0;
+    int solAchada = 0;
+    int nosVisitados = 1;
 
-    ordenada(rota, 1, 0, solAchada, rotaAchada, nosVisitados);
+    for (int i = 1; i < num_vertices; i++) {
+        int cidadeAtual = rota[i - 1];
+        int melhorVizinho = -1;
+        int menorDistancia = numeric_limits<int>::max();
+
+        for (int j = 0; j < num_vertices; j++) {
+            if (!visitada[j] && dist[cidadeAtual][j] < menorDistancia) {
+                melhorVizinho = j;
+                menorDistancia = dist[cidadeAtual][j];
+            }
+        }
+
+        if (melhorVizinho == -1) {
+            solAchada = numeric_limits<int>::max();
+            break;
+        }
+
+        rota[i] = melhorVizinho;
+        visitada[melhorVizinho] = true;
+        solAchada += menorDistancia;
+        nosVisitados++;
+    }
+
+    solAchada += dist[rota[num_vertices - 1]][rota[0]]; // Fechando o ciclo
     
     ofstream fout("source/" + arq);
     fout << num_vertices << "\n";
-
     for (int i = 0; i < num_vertices - 1; i++)
-        fout << rotaAchada[i] + 1 << " " << rotaAchada[i + 1] + 1 << " " << dist[rotaAchada[i]][rotaAchada[i + 1]] << "\n";
-    fout << rotaAchada.back() + 1 << " " << rotaAchada[0] + 1 << " " << dist[rotaAchada.back()][rotaAchada[0]] << "\n";
+        fout << rota[i] + 1 << " " << rota[i + 1] + 1 << " " << dist[rota[i]][rota[i + 1]] << "\n";
+    fout << rota.back() + 1 << " " << rota[0] + 1 << " " << dist[rota.back()][rota[0]] << "\n";
 
-    if (solAchada == INF)
+    if (solAchada == numeric_limits<int>::max())
         cout << "Fracasso!\n";
     else 
         cout << "Sucesso!\n";
@@ -34,49 +58,4 @@ pair<int, int> Grafo::ordenada(string arq) {
     cout << "Tempo de execucao: " << duration.count() << " ms" << endl;
     
     return {solAchada, nosVisitados};
-}
-
-void Grafo::ordenada(vector<int>& rota, int pos, int valor, int& solAchada, vector<int>& rotaAchada, int& nosVisitados) {
-    nosVisitados++;
-    
-    vector<bool> visitada(num_vertices, false);
-    for (int i = 0; i < pos; i++) {
-        if (visitada[rota[i]]) {
-            solAchada = INF;
-            return;
-        }
-        visitada[rota[i]] = true;
-    }
-    
-    if (pos == num_vertices) {
-        valor += dist[rota[pos-1]][rota[0]];
-        solAchada = valor;
-        rotaAchada = rota;
-        return;
-    }
-    
-    vector<pair<int, int>> candidatos;
-    for (int i = 0; i < num_vertices; i++) {
-        bool adicionada = false;
-        for (int j = 0; j < pos; j++) {
-            if (i == rota[j]) {
-                adicionada = true;
-                break;
-            }
-        }
-        if (!adicionada) {
-            candidatos.emplace_back(dist[rota[pos - 1]][i], i);
-        }
-    }
-    
-    sort(candidatos.begin(), candidatos.end());
-    
-    for (const auto& par : candidatos) {
-        int custo = par.first;
-        int cidade = par.second;
-    
-        rota[pos] = cidade;
-        ordenada(rota, pos + 1, valor + custo, solAchada, rotaAchada, nosVisitados);
-        rota[pos] = -1;
-    }
 }
