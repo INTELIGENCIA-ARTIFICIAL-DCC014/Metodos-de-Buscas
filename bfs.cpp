@@ -13,6 +13,7 @@ pair<int, int> Grafo::bfs(string arq) {
     int solOtima = INF;
     vector<int> rotaOtima;
     int nosVisitados = 0;
+    int nosVisitadosFinal = 0;        
 
     // Fila de prioridade para realizar a busca em largura (BFS)
     queue<pair<vector<int>, int>> q;
@@ -42,7 +43,8 @@ pair<int, int> Grafo::bfs(string arq) {
             // Se o custo encontrado for menor que o custo da melhor solução, atualiza a solução ótima
             if(valor < solOtima) {
                 solOtima = valor;
-                rotaOtima = rota;  
+                rotaOtima = rota;
+                nosVisitadosFinal = nosVisitados;
             }
         }
         else {
@@ -85,5 +87,5 @@ pair<int, int> Grafo::bfs(string arq) {
     chrono::duration<double, milli> duration = end - start;
     cout << "Tempo de execucao: " << duration.count() << " ms" << endl;
 
-    return {solOtima, nosVisitados};
+    return {solOtima, nosVisitadosFinal};
 }

@@ -16,8 +16,9 @@ pair<int, int> Grafo::profundidade(string arq) {
 
     int solOtima = INF;
     int nosVisitados = 0;
+    int nosVisitadosFinal;
     
-    profundidade(rota, 1, 0, solOtima, rotaOtima, nosVisitados);
+    profundidade(rota, 1, 0, solOtima, rotaOtima, nosVisitados, nosVisitadosFinal);
 
     ofstream fout("source/" + arq);
     fout << num_vertices << "\n";
@@ -32,17 +33,17 @@ pair<int, int> Grafo::profundidade(string arq) {
     chrono::duration<double, milli> duration = end - start;
     cout << "Tempo de execucao: " << duration.count() << " ms" << endl;
 
-    return {solOtima, nosVisitados};
+    return {solOtima, nosVisitadosFinal};
 }
 
 // Função recursiva que implementa a busca em profundidade.
-void Grafo::profundidade(vector<int>& rota, int pos, int valor, int &solOtima, vector<int>& rotaOtima, int& nosVisitados) {
-    nosVisitados++;
+void Grafo::profundidade(vector<int>& rota, int pos, int valor, int &solOtima, vector<int>& rotaOtima, int& nosVisitados, int& nosVisitadosFinal) {
 
     // Poda: Se a solução parcial já for pior que a melhor solução até agora, a busca é interrompida
     if(valor > solOtima)
         return;
 
+    nosVisitados++;
     // Caso a solução for completada (pos == num_vertices), ou seja, todos os vértices foram visitados
     if(pos == num_vertices) {
         valor += dist[rota[pos - 1]][rota[0]];
@@ -50,7 +51,8 @@ void Grafo::profundidade(vector<int>& rota, int pos, int valor, int &solOtima, v
         // Se a solução encontrada for melhor que a melhor solução até o momento, atualiza as variáveis
         if(valor < solOtima) {
             solOtima = valor;
-            rotaOtima = rota;  
+            rotaOtima = rota;
+            nosVisitadosFinal = nosVisitados;
         }
 
         return;
@@ -75,7 +77,7 @@ void Grafo::profundidade(vector<int>& rota, int pos, int valor, int &solOtima, v
         // Adiciona o vértice i à posição atual da rota.
         rota[pos] = i;
 
-        profundidade(rota, pos + 1, valor + dist[rota[pos - 1]][rota[pos]], solOtima, rotaOtima, nosVisitados);
+        profundidade(rota, pos + 1, valor + dist[rota[pos - 1]][rota[pos]], solOtima, rotaOtima, nosVisitados, nosVisitadosFinal);
 
         rota[pos] = -1;
     }

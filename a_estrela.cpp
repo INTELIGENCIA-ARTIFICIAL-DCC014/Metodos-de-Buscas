@@ -49,6 +49,7 @@ pair<int, int> Grafo::a_estrela(string arq) {
 
     int solAchada = numeric_limits<int>::max();
     int nosVisitados = 0;
+    int nosVisitadosFinal;
 
     while (!fila.empty()) {
         NoA atual = fila.top();
@@ -58,6 +59,7 @@ pair<int, int> Grafo::a_estrela(string arq) {
         if (atual.rota.size() == num_vertices) {
             int custoTotal = atual.custoReal + dist[atual.rota.back()][0];
             if (custoTotal < solAchada) {
+                nosVisitadosFinal = nosVisitados;
                 solAchada = custoTotal;
                 ofstream fout("source/" + arq);
                 fout << num_vertices << "\n";
@@ -90,5 +92,5 @@ pair<int, int> Grafo::a_estrela(string arq) {
     chrono::duration<double, milli> duration = end - start;
     cout << "Tempo de execucao: " << duration.count() << " ms" << endl;
 
-    return {solAchada, nosVisitados};
+    return {solAchada, nosVisitadosFinal};
 }

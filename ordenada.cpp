@@ -26,6 +26,7 @@ pair<int, int> Grafo::ordenada(string arq) {
     int solOtima = INF;          // Custo da solução ótima
     vector<int> rotaOtima;       // Rota ótima
     int nosVisitados = 0;        // Contador de nós visitados
+    int nosVisitadosFinal = 0;        // Contador de nós visitados final
 
     // Fila de prioridade para realizar a busca ordenada (menor custo primeiro)
     priority_queue<Node, vector<Node>, greater<Node>> pq;
@@ -54,6 +55,7 @@ pair<int, int> Grafo::ordenada(string arq) {
             if (custo < solOtima) {
                 solOtima = custo;
                 rotaOtima = rota;
+                nosVisitadosFinal = nosVisitados;
             }
         } else {
             bool visitada;
@@ -100,5 +102,5 @@ pair<int, int> Grafo::ordenada(string arq) {
     chrono::duration<double, milli> duration = end - start;
     cout << "Tempo de execucao: " << duration.count() << " ms" << endl;
 
-    return {solOtima, nosVisitados};
+    return {solOtima, nosVisitadosFinal};
 }
