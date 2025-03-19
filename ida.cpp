@@ -32,12 +32,12 @@ pair<int, int> Grafo::ida(string arq) {
         limite = novoLimite; // Atualiza o limite para a próxima iteração
     }
 
-    // Escrevendo a rota no arquivo
+    // Escrevendo a rota ótima no arquivo
     ofstream fout("source/" + arq);
     fout << num_vertices << "\n";
     for (int i = 0; i < num_vertices - 1; i++)
-        fout << rota[i] + 1 << " " << rota[i + 1] + 1 << " " << dist[rota[i]][rota[i + 1]] << "\n";
-    fout << rota.back() + 1 << " " << rota[0] + 1 << " " << dist[rota.back()][rota[0]] << "\n";
+        fout << rotaOtima[i] + 1 << " " << rotaOtima[i + 1] + 1 << " " << dist[rotaOtima[i]][rotaOtima[i + 1]] << "\n";
+    fout << rotaOtima.back() + 1 << " " << rotaOtima[0] + 1 << " " << dist[rotaOtima.back()][rotaOtima[0]] << "\n";
 
     auto end = chrono::high_resolution_clock::now();
     chrono::duration<double, milli> duration = end - start;
