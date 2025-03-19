@@ -59,26 +59,36 @@ void Grafo::profundidade(vector<int>& rota, int pos, int valor, int &solOtima, v
     }
 
     bool visitada;
-    
+    int melhorVizinho = -1;
+    int menorDistancia = numeric_limits<int>::max();
+
     // Para cada vértice i que ainda não foi visitado
     for(int i = 0; i < num_vertices; i++) {
         visitada = false;
 
         // Verifica se o vértice já foi visitado na rota parcial
-        for(int j = 0; j < pos; j++) 
+        for(int j = 0; j < pos; j++) {
             if(i == rota[j]) {
                 visitada = true;
                 break;
             }
-
+        }
+            
         // Se o vértice já foi visitado, ignora ele e passa para o próximo
         if(visitada) continue;
 
-        // Adiciona o vértice i à posição atual da rota.
-        rota[pos] = i;
+        if (dist[rota[pos - 1]][i] < menorDistancia) {
+            melhorVizinho = i;
+            menorDistancia = dist[rota[pos-1]][i];
+        }  
 
-        profundidade(rota, pos + 1, valor + dist[rota[pos - 1]][rota[pos]], solOtima, rotaOtima, nosVisitados, nosVisitadosFinal);
-
-        rota[pos] = -1;
     }
+
+    if(melhorVizinho == -1){
+        return;    
+    }
+
+    rota[pos] = melhorVizinho;
+    profundidade(rota, pos + 1, valor + dist[rota[pos - 1]][rota[pos]], solOtima, rotaOtima, nosVisitados, nosVisitadosFinal);
+    rota[pos] = -1;
 }
