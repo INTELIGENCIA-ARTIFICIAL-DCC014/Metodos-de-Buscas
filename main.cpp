@@ -52,6 +52,16 @@ int main() {
     cout << "Custo: " << resultado.first << "\n";
     cout << "Nos visitados: " << resultado.second << "\n\n";
 
+    cout << "BUSCA GULOSA\n";
+    resultado = g.gulosa("solucao_gulosa.txt");
+    cout << "Custo: " << resultado.first << "\n";
+    cout << "Nos visitados: " << resultado.second << "\n\n";
+
+    cout << "BUSCA A*\n";
+    resultado = g.a_estrela("solucao_a_estrela.txt");
+    cout << "Custo: " << resultado.first << "\n";
+    cout << "Nos visitados: " << resultado.second << "\n\n";
+
     cout << "BUSCA IDA*\n";
     resultado = g.ida("solucao_ida.txt");
     cout << "Custo: " << resultado.first << "\n";
