@@ -97,8 +97,6 @@ class Grafo {
         }
 
         // Métodos de Busca
-        pair<int, int> irrevogavel(string arq);
-        void irrevogavel(vector<int>& rota, int pos, int valor, int& solAchada, vector<int>& rotaAchada, int& nosVisitados);
 
         pair<int, int> backtracking(string arq);
         void backtracking(vector<int>& rota, int pos, int valor, int& solAchada, vector<int>& rotaAchada, int& nosVisitados);

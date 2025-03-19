@@ -27,13 +27,8 @@ int main() {
     // Fechando o arquivo 
     arquivo.close();
 
-    cout << "BUSCA IRREVOGAVEL\n";
-    auto resultado = g.irrevogavel("solucao_irrevogavel.txt");
-    cout << "Custo: " << resultado.first << "\n";
-    cout << "Nos visitados: " << resultado.second << "\n\n";
-
     cout << "BUSCA BACKTRACKING\n";
-    resultado = g.backtracking("solucao_backtracking.txt");
+    auto resultado = g.backtracking("solucao_backtracking.txt");
     cout << "Custo: " << resultado.first << "\n";
     cout << "Nos visitados: " << resultado.second << "\n\n";
 
