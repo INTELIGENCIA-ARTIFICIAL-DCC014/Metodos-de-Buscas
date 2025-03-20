@@ -15,10 +15,6 @@ struct Node {
 
     // Sobrecarga do operador para ordenar os nós pelo custo (menor custo primeiro)
     bool operator>(const Node& other) const {
-        if (custo == other.custo) {
-            // Em caso de empate no custo, prioriza o vértice com menor índice
-            return rota.back() > other.rota.back();
-        }
         return custo > other.custo;
     }
 };
@@ -27,10 +23,10 @@ pair<int, int> Grafo::ordenada(string arq) {
     // Marca o início do tempo
     auto start = chrono::high_resolution_clock::now();
 
-    int solOtima = numeric_limits<int>::max(); // Custo da solução ótima
-    vector<int> rotaOtima;                     // Rota ótima
-    int nosVisitados = 0;                      // Contador de nós visitados
-    int nosVisitadosFinal = 0;                 // Contador de nós visitados final
+    int solOtima = INF;          // Custo da solução ótima
+    vector<int> rotaOtima;       // Rota ótima
+    int nosVisitados = 0;        // Contador de nós visitados
+    int nosVisitadosFinal = 0;        // Contador de nós visitados final
 
     // Fila de prioridade para realizar a busca ordenada (menor custo primeiro)
     priority_queue<Node, vector<Node>, greater<Node>> pq;
@@ -62,9 +58,11 @@ pair<int, int> Grafo::ordenada(string arq) {
                 nosVisitadosFinal = nosVisitados;
             }
         } else {
-            // Itera sobre todos os vértices para tentar adicioná-los à rota, seguindo a ordem ordinária
+            bool visitada;
+
+            // Itera sobre todos os vértices para tentar adicioná-los à rota
             for (int i = 0; i < num_vertices; i++) {
-                bool visitada = false;
+                visitada = false;
 
                 // Verifica se o vértice i já foi visitado na rota parcial
                 for (int j = 0; j < rota.size(); j++) {
