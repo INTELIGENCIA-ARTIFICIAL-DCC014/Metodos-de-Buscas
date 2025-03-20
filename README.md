@@ -43,10 +43,21 @@ Cada algoritmo está implementado em sua respectiva pasta.
 - **g++** (versão 10 ou superior)
 - **Arquivos de entrada**: Arquivo de instância do problema em formato `.txt`
 
-## 🚀 Como Usar  
+## 🚀 Como Usar em Windows 
 Para rodar os algoritmos localmente, siga as instruções abaixo:
 
 1. **Compilar o código**:
+   ```bash
+   g++ main.cpp bfs.cpp profundidade.cpp irrevogavel.cpp backtracking.cpp ordenada.cpp ida.cpp -o metodos-de-busca.exe
+
+2. **Executar o código**:
+   ```bash
+   .\metodos-de-busca.exe instancia.txt
+
+## 🚀 Como Usar em Linux   
+Para rodar os algoritmos localmente, siga as instruções abaixo:
+
+1. **Compilar e executar o código**:
    ```bash
    g++ main.cpp bfs.cpp profundidade.cpp irrevogavel.cpp backtracking.cpp ordenada.cpp ida.cpp -o metodos-de-busca.exe
 
