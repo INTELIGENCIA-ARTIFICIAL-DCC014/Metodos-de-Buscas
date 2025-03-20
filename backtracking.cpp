@@ -65,36 +65,20 @@ void Grafo::backtracking(vector<int>& rota, int pos, int valor, int& solAchada,
         // Se uma solução já foi encontrada, interrompe a busca
         if (solAchada != -1) return;
 
-        bool visitada;
-        int melhorVizinho = -1;
-        int menorDistancia = numeric_limits<int>::max();
+        bool visitada = false;
 
-        // Para cada vértice i que ainda não foi visitado
-        for (int i = 0; i < num_vertices; i++) {
-            visitada = false;
-
-            // Verifica se o vértice já foi visitado na rota parcial
-            for (int j = 0; j < pos; j++) {
-                if (i == rota[j]) {
-                    visitada = true;
-                    break;
-                }
-            }
-
-            // Se o vértice já foi visitado, ignora ele e passa para o próximo
-            if (visitada) continue;
-
-            if (dist[rota[pos - 1]][i] < menorDistancia) {
-                melhorVizinho = i;
-                menorDistancia = dist[rota[pos - 1]][i];
+        // Verifica se o vértice já foi visitado na rota parcial
+        for (int j = 0; j < pos; j++) {
+            if (i == rota[j]) {
+                visitada = true;
+                break;
             }
         }
 
-        if (melhorVizinho == -1) {
-            return;
-        }
+        // Se o vértice já foi visitado, ignora ele e passa para o próximo
+        if (visitada) continue;
 
-        rota[pos] = melhorVizinho;
+        rota[pos] = i;
 
         backtracking(rota, pos + 1, valor + dist[rota[pos - 1]][rota[pos]],
                      solAchada, rotaAchada, nosVisitados);
