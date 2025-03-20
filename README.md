@@ -59,8 +59,5 @@ Para rodar os algoritmos localmente, siga as instruções abaixo:
 
 1. **Compilar e executar o código**:
    ```bash
-   g++ main.cpp bfs.cpp profundidade.cpp irrevogavel.cpp backtracking.cpp ordenada.cpp ida.cpp -o metodos-de-busca.exe
+   g++ g++ *.cpp -o main && ./main
 
-2. **Executar o código**:
-   ```bash
-   .\metodos-de-busca.exe instancia.txt
