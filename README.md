@@ -59,5 +59,5 @@ Para rodar os algoritmos localmente, siga as instruções abaixo:
 
 1. **Compilar e executar o código**:
    ```bash
-   g++ g++ *.cpp -o main && ./main
+   g++ *.cpp -o main && ./main
 
